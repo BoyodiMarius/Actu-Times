@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                >
+    <h:form enctype="multipart/form-data">
+        <!-- EN TETE -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#"><img src="resources/assets/images/logoGesparc.png" alt="" /></a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+                        <ul class="nav navbar-nav navbar-right" id="nav" style="min-height: 100px;">
+                            <li class="#{ActiveMBean.laUne}"  ><a href="AcceuilClient.xhtml">A la Une</a></li>
+                            <li class="#{ActiveMBean.meslikes}" ><a href="Likes.xhtml" style="margin-left: 10px; margin-right: 30px;" >Mes Likes </a></li>
+                            <li class="#{ActiveMBean.parametres}"><a href="Parametres.xhtml" style="margin-left: 35px; margin-right: 55px;" > Parametres </a></li>
+                            <li ><a style="margin-left: 220px;" > <center>  </center> </a></li>
+                            <li style=" margin-top: 30px; " ><center>
+                                    <h:panelGrid columns="2">
+                                        
+                                        <p:commandButton  icon="ui-icon-power" actionListener="#{ConnexionMBean.deconnexion()}"   ajax="false" />   
+                                        <p:outputLabel value="#{ConnexionMBean.info}" style="color: white;" /> 
+                                    </h:panelGrid> 
+                                </center>
+                            </li>
+                           
+                            <li >  <p:graphicImage value="#{ConnexionMBean.profil}"  style="margin-left: 30px; margin-right: 250px; margin-top: 20px;margin-bottom: 5px; width: 50%" />    </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav> 
+
+        <!-- CORPS -->
+        
+
+    </h:form>
+</ui:composition>

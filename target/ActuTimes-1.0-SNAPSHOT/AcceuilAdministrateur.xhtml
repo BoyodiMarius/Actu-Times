@@ -1,0 +1,149 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templatesAdmin.xhtml" id="articles">
+    <ui:define name="content" >
+        <h:form id="AjoutArticles" styleClass="AjoutArticles"  enctype="multipart/form-data" >
+            <p:layout fullPage="true" styleClass="nav navbar-nav navbar-right"  >
+             
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center"  >
+                 
+                      
+                    <center>
+                       <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />  
+                       <p:fieldset id="fieldArticles" styleClass="fieldArticles" > 
+                       <table>
+                           <tr>
+                               <td>
+                                   <h:panelGrid  columns="1" >
+                                        <p:outputLabel style="color: black" for="niveauArticle" value="Niveau" />  
+                                        <p:selectOneListbox id="niveauArticle" value="#{administrationMBean.niveau}" filter="true" 
+                                                            converter="omnifaces.SelectItemsConverter" styleClass="categorie" class="cadre" style="width: 150px; background: #ffffff">
+                                            <f:selectItem itemLabel="A la une" itemValue="A la une"  />
+                                            <f:selectItem itemLabel="Secondaire" itemValue="Secondaire" />
+                                        </p:selectOneListbox>
+                                   </h:panelGrid>
+                               </td>
+                               <td  width="8%">
+                                   <br/>
+                               </td>
+                                 <td>
+                                   <h:panelGrid  columns="1" >
+                                        <p:outputLabel style="color: black" for="typeArticle" value="Catégorie" />  
+                                        <p:selectOneListbox id="typeArticle" value="#{administrationMBean.categorie}" filter="true" 
+                                                          converter="omnifaces.SelectItemsConverter" styleClass="categorie"  style="width: 150px;  background: #ffffff">
+                                           
+                                            <f:selectItems value="#{administrationMBean.listeCategories}" var="cat" itemLabel="#{cat.libelleCategorie}" 
+                                                                         itemValue="#{cat}"/>                              
+                                        </p:selectOneListbox>
+                                        <p:commandButton style="width:150px;" value="Ajouter" icon="ui-icon-plus" onclick="PF('categorieDlg').show()"/>
+                                   </h:panelGrid>
+                               </td>
+                               <td  width="8%">
+                                   <br/>
+                               </td>
+                               <td>
+                                   <h:panelGrid  columns="2" >
+                                       <p:outputLabel for="titreArticle" value="Titre  "/>
+                                       <p:inputText id="titreArticle" style="background: #ffffff"  styleClass="libelle"  value="#{administrationMBean.titre}"  />
+                                       
+                                       <p:outputLabel style="color: black"  value="" />
+                                       <p:outputLabel style="color: black"  value="" />  
+                                       
+                                        <p:outputLabel for="auteurArticle" value="Auteur  "/>
+                                        <p:inputText id="auteurArticle" style="background: #ffffff"  styleClass="libelle"  value="#{administrationMBean.auteur}"  />
+                                                                               
+                                   </h:panelGrid>
+                                   
+                               </td>
+                               <td  width="8%">
+                                   <br/>
+                               </td>
+                               <td>
+                                   <h:panelGrid  columns="2" >
+                                       <p:outputLabel for="date" value=" Date de publication :"/>
+                                        <p:calendar id="date" style="background: #ffffff" value="#{administrationMBean.datePublication}" styleClass="date" autocomplete="off" lang="french" mask="true" pattern="dd/MM/yyyy" showOn="button" >
+                                        </p:calendar>
+                                       
+                                       <p:outputLabel style="color: black"  value="" />
+                                       <p:outputLabel style="color: black"  value="" />  
+                                       
+                                       <p:outputLabel  value="Image :  "/>
+                                       <p:fileUpload  value="#{administrationMBean.imageArticles}" mode="simple" allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" label="Choisir une image pour l'article" />
+                                
+                                       
+                                   </h:panelGrid>
+                                   
+                               </td>
+                          </tr>
+                       </table>
+                    
+                       
+                       <p:outputLabel style="color: black"  value="" />
+                        <p:outputLabel style="color: black"  value="" /> 
+                       
+                       <h:panelGrid columns="1">
+                           <p:outputLabel for="contenueArticle" value="Contenu de l'article  "/>
+                       </h:panelGrid>
+                       <h:panelGrid columns="1">
+                           
+                           <p:inputTextarea rows="15" cols="80" id="contenueArticle" value="#{administrationMBean.contenue}" style=" background: #ffffff" />
+                           <br/>
+                           <f:facet name="footer">  
+                            <center>
+                                <p:commandButton value="Publier"  style="background: #14a0da" icon="ui-icon-check"  ajax="false" actionListener="#{administrationMBean.enregistrer()}" update="@( .AjoutArticles)"/>
+                                <p:commandButton value="Annuler" style="background: #843534"  icon="ui-icon-cancel" ajax="false" actionListener="#{administrationMBean.rafraichir()}" />
+
+                                <!--<p:commandLink action="faces/pages/rechercheAnomalie?faces-redirect=true" id="loginButton" value="Login" ajax="false"/>-->
+                            </center>
+                        </f:facet>  
+                       </h:panelGrid>
+                 </p:fieldset>
+                    </center>      
+                </p:layoutUnit>
+            </p:layout>
+        </h:form>
+        
+            <p:dialog widgetVar="categorieDlg" width="400" height="170" closable="true" header="Enrégistrement de catégorie" resizable="false" draggable="true" id="categorieDlg" modal="true">
+            <h:form >
+                <center>
+                   
+                    <p:fieldset styleClass="fieldCategorie">
+                         <p:messages id="messages1" showDetail="true" autoUpdate="true" closable="true"  />
+                            <table >
+                                <tr>
+                                    
+                                    <td align="top" >
+                                        <h:panelGrid id="gridCategorie" columns="3" cellspacing="10" cellpadding="10">
+                                            <p:outputLabel for="designaticonCat" value="Désignation :"/>
+                                            <p:inputText id="designaticonCat"  style="background: #ffffff" styleClass="designaticonCat"  value="#{administrationMBean.formObjectCategories.libelleCategorie}"  />
+                                            <p:message for="designaticonCat" display="icon"/>
+                                            
+                                        </h:panelGrid>  
+                                    </td>
+                                </tr>
+                            </table>
+                        
+                            
+                            <br/>
+                            <br/>
+                            <h:panelGrid columns="6">
+                                <p:commandButton  style="margin-right: 8px; background: #a94442; color: white" update="@(.fieldCategorie, .fieldArticles, .AjoutArticles)"  value="Valider" actionListener="#{administrationMBean.enregistrerCategorie()}" icon="ui-icon-disk" class="btn btn-primary btn-lg"/>
+                                <br/><br/>
+                                <p:commandButton  style="margin-right: 8px; background: #999; color: white"  update="@(.fieldCategorie)" value="Annuler" icon="ui-icon-cancel" class="btn btn-primary btn-lg"/>
+                                <!--<p:outputLabel value="#chargerCarburantMBean.vehicule.immatriculation}"/>-->
+                            </h:panelGrid>
+                        </p:fieldset>
+                    
+                </center>
+            </h:form>
+
+        </p:dialog>
+    </ui:define>
+</ui:composition>

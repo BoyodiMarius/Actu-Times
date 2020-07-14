@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="com.mycompany_ActuTimes_war_1.0-SNAPSHOTPU" transaction-type="JTA">
+    <jta-data-source>java:app/PostgresDs</jta-data-source>
+    <class>fr.marcorp.ActuTimes.entities.articles</class>
+    <class>fr.marcorp.ActuTimes.entities.categories</class>
+    <class>fr.marcorp.ActuTimes.entities.likes</class>
+    <class>fr.marcorp.ActuTimes.entities.utilisateurs</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+    </properties>
+  </persistence-unit>
+</persistence>

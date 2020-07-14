@@ -1,0 +1,120 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templatesAdmin.xhtml" id="parametreAdmin">
+    <ui:define name="content" >
+     
+        <h:form id="ajout" styleClass="ajout"  enctype="multipart/form-data" >
+           <p:layout fullPage="true" styleClass="nav navbar-nav navbar-right"  >
+             
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center"  >
+                                         
+                    <center>
+                       <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />       
+                    <table>
+                        <td>
+                            <center>
+                                
+                                <h:panelGrid  columnClasses="1" >  
+                                    <p:graphicImage value="#{parametresManagedBean.formObjectUtilisateur.photProfil}"  width="300" height="300"/>
+                                    
+                                    <p:outputLabel value=""/>
+                                    <h:panelGrid  columns="2" >
+                                        <p:fileUpload  value="#{parametresManagedBean.image1}" mode="simple" allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" label="Choisir une photode Profil" />
+                                        <p:commandButton style="background-color: #14a0da" value="Modifier"
+                                                         actionListener="#{parametresManagedBean.uploaderImg1()}"
+                                                         update="@(.fieldModif, ..ajout)"   icon="ui-icon-pencil" />
+                                        
+                                    </h:panelGrid>
+                                    
+                                    <p:outputLabel value=""/>
+                                    <p:fieldset id="fieldArticles" styleClass="fieldModif" >
+                                <h:panelGrid  columns="4" styleClass="Modif" >    
+                                <p:outputLabel value="Pseudo"/>
+                                <p:inputText value="#{parametresManagedBean.formObjectUtilisateur.pseudo}" id="pseudo" disabled="#{parametresManagedBean.enregistrePseudo}" />
+                                <p:commandButton value="Modifier" style="background-color: #14a0da" actionListener="#{parametresManagedBean.effectuerModificationPseudo()}" update="@(.fieldModif)" disabled="#{parametresManagedBean.modifPseudo}" icon="ui-icon-pencil"  />
+                                <p:commandButton value="Enregistrer" style="background-color: #398439" disabled="#{parametresManagedBean.enregistrePseudo}"
+                                                 actionListener="#{parametresManagedBean.enregistrerPseudo()}" update="@(.fieldModif, ..ajout)"  icon="ui-icon-check" />
+                                
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                
+                                <p:commandButton value="Modifier Mot de Passe" style="background-color: #14a0da" actionListener="#{parametresManagedBean.effectuerModificationMdp()}" update="@(.fieldModif)"  icon="ui-icon-pencil" />
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                               
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                
+                               
+                                <p:outputLabel value="Ancien Mot de Passe"/>
+                                <p:password id="ancienMdp" value="#{parametresManagedBean.ancienMdp}" disabled="#{parametresManagedBean.modifMotDePasse}" redisplay="true"
+                                     requiredMessage="Entrer le mot de passe" style="width: 200px;" styleClass="selectmenu"  />
+                                 <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                                               
+                                <p:outputLabel value="Nouveau Mot de Passe"/>
+                                <p:password id="newMdp" value="#{parametresManagedBean.newMdp}" disabled="#{parametresManagedBean.modifMotDePasse}" feedback="true" redisplay="true"
+                                     requiredMessage="Entrer le mot de passe" style="width: 200px;" styleClass="selectmenu" 
+                                     weakLabel="Mot de passe Faible" goodLabel="Mot de Passe bon" strongLabel=" Mot de Passe Fort" promptLabel="Entrez votre nouveau mot de passe"/>
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                
+                                <p:outputLabel value="Confirmation nouveau Mot de Passe"/>
+                                <p:password id="ConfirmationNewMdp" value="#{parametresManagedBean.confirmMdp}" disabled="#{parametresManagedBean.modifMotDePasse}" feedback="true"  redisplay="true"
+                                     requiredMessage="Entrer le mot de passe" style="width: 200px;" styleClass="selectmenu" 
+                                     weakLabel="Mot de passe Faible" goodLabel="Mot de Passe bon" strongLabel=" Mot de Passe Fort" promptLabel="Confirmez votre nouveau mot de passe"/>
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                <p:outputLabel value=""/>
+                                
+                                <p:outputLabel value=""/>
+                                <p:commandButton value="Valider" style="background-color: #398439" disabled="#{parametresManagedBean.modifMotDePasse}" actionListener="#{parametresManagedBean.enregistrerMdp()}" update="@(.fieldModif)"  icon="ui-icon-check" />
+                                <p:commandButton value="Annuler" style="background-color: #843534" disabled="#{parametresManagedBean.modifMotDePasse}" actionListener="#{parametresManagedBean.annulerModification()}" update="@(.fieldModif)" icon="ui-icon-cancel" />
+                                <p:outputLabel value=""/>
+                                
+                               
+                                 </h:panelGrid> 
+                                    </p:fieldset>
+                                 </h:panelGrid> 
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                
+                            </center>
+                        </td>
+                    </table>
+                    </center>      
+                </p:layoutUnit>
+            </p:layout>
+        </h:form>
+    </ui:define>
+    
+
+</ui:composition>

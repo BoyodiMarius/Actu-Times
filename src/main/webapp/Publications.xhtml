@@ -1,0 +1,152 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templatesAdmin.xhtml">
+    <ui:define name="content">
+        
+        <h:form id="publication">
+           <p:layout fullPage="true" styleClass="nav navbar-nav navbar-right"  >
+             
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center"  >
+                 
+                    <center>
+                       <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />       
+                    <h:panelGrid  columnClasses="3" >  
+                        <p:dataTable var="f" value="#{acceuilMBean.listeArticles}" 
+                                     selection="#{administrationMBean.selectObjectArticles}"   rowKey="#{f.idArticles}"
+                                 emptyMessage="Aucun Article" selectionMode="single"
+                                 rows="20" scrollable="false"  paginator="true" paginatorPosition="top" 
+                                 styleClass="classArticle">
+                            <p:ajax event="rowDblselect" update="@(.fieldModification)" listener="#{administrationMBean.rowSelect()}" />
+                            <p:column filterBy="#{f.idCategorie.libelleCategorie}" sortBy="#{f.idCategorie.libelleCategorie}">
+                                <f:facet name="header"> <h:outputText value=" Catégorie "/> </f:facet>
+                                <center>
+                                    <h:outputText value="#{f.idCategorie.libelleCategorie}"  ></h:outputText>
+                                </center>
+                            </p:column>
+                            <p:column filterBy="#{f.titreArticle}" sortBy="#{f.titreArticle}">
+                                <f:facet name="header"> <h:outputText value=" Titre "/> </f:facet>
+                                <center>
+                                    <h:outputText value="#{f.titreArticle}"  ></h:outputText>
+                                </center>
+                            </p:column>
+                            <p:column >
+                                <f:facet name="header"> <h:outputText value=" Auteur "/> </f:facet>
+                                <center>
+                                    <h:outputText value="#{f.auteurArticle}"  ></h:outputText>
+                                </center>
+                            </p:column>
+                             <p:column >
+                                <f:facet name="header"> <h:outputText value=" Contenu "/> </f:facet>
+                                <center>
+                                    <h:outputText value="#{f.contenuArticle}"  ></h:outputText>
+                                </center>
+                            </p:column>
+                            <p:column >
+                                <f:facet name="header"> <h:outputText value=" Date de Publication "/> </f:facet>
+                                <center>
+                                    <h:outputText value="#{f.datePublication}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET" locale="fr"/>
+                                    </h:outputText>
+                                </center>
+                            </p:column>
+                            <p:column >
+                                <f:facet name="header"> <h:outputText value=" Image "/> </f:facet>
+                                <center>
+                                   <p:graphicImage value="#{f.imageArticles}" width="100" height="100" /> 
+                                </center>
+                            </p:column>
+                        </p:dataTable>
+                    </h:panelGrid>  
+                 
+                    </center>      
+                </p:layoutUnit>
+            </p:layout>
+        </h:form>
+        <p:dialog widgetVar="modifDlg" width="800" height="500" closable="true" header="Modification" draggable="true" id="modifDlg" modal="true">
+            <h:form enctype="multipart/form-data">
+                <p:fieldset  id="fieldModification" styleClass="fieldModification">
+                    <center>
+                       <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />       
+                    <h:panelGrid  columns="2" >  
+                        
+                        <p:outputLabel style="color: black" for="niveauArticle" value="Niveau" />  
+                        <p:selectOneMenu id="niveauArticle" value="#{administrationMBean.selectObjectArticles.priorite}" filter="true" 
+                                          converter="omnifaces.SelectItemsConverter" styleClass="niveau"  style="width: 150px">
+                             <f:selectItem itemLabel="Selectionner le niveau" itemValue="niveau" />
+                            <f:selectItem itemLabel="A la une" itemValue="A la une" />
+                            <f:selectItem itemLabel="Secondaire" itemValue="Secondaire" />
+                        </p:selectOneMenu>
+                       <p:outputLabel style="color: black"  value="" />
+                       <p:outputLabel style="color: black"  value="" />  
+ 
+                        <p:outputLabel style="color: black" for="typeArticle" value="Catégorie" />  
+                        <p:selectOneMenu id="typeArticle" value="#{administrationMBean.selectObjectArticles.idCategorie}" filter="true" 
+                                          converter="omnifaces.SelectItemsConverter" styleClass="categorie"  style="width: 150px">
+                             <f:selectItem itemLabel="Selectionner la catégorie"  />
+                            <f:selectItems value="#{administrationMBean.listeCategories}" var="cat" itemLabel="#{cat.libelleCategorie}" 
+                                                         itemValue="#{cat}"/>                              
+                        </p:selectOneMenu>
+                        <p:outputLabel style="color: black"  value="" />
+                        <p:outputLabel style="color: black"  value="" /> 
+                       
+                        <p:outputLabel for="date" value=" Date de publication :"/>
+                        <p:calendar id="date" style="background: #ffffff" value="#{administrationMBean.selectObjectArticles.datePublication}" styleClass="date" autocomplete="off" lang="french" mask="true" pattern="dd/MM/yyyy" showOn="button" >
+                        </p:calendar>
+                        
+                        <p:outputLabel style="color: black"  value="" />
+                        <p:outputLabel style="color: black"  value="" /> 
+                        
+                        <p:outputLabel for="titreArticle" value="Titre  "/>
+                        <p:inputText id="titreArticle" style="background: #ffffff"  styleClass="libelle"  value="#{administrationMBean.selectObjectArticles.titreArticle}"  />
+                        
+                        <p:outputLabel style="color: black"  value="" />
+                        <p:outputLabel style="color: black"  value="" /> 
+                        
+                        <p:outputLabel for="auteurArticle" value="Auteur  "/>
+                        <p:inputText id="auteurArticle" style="background: #ffffff"  styleClass="auteur"  value="#{administrationMBean.selectObjectArticles.auteurArticle}"  />
+                        
+                        <p:outputLabel style="color: black"  value="" />
+                        <p:outputLabel style="color: black"  value="" /> 
+                        
+                        <p:outputLabel  value="Image :  "/>
+                        <p:fileUpload  value="#{administrationMBean.imageArticlesModifier}" mode="simple" allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" label="Choisir une image pour l'article" />
+                                       
+                        
+                    </h:panelGrid>  
+                       
+                       <p:outputLabel style="color: black"  value="" />
+                        <p:outputLabel style="color: black"  value="" /> 
+                       
+                       <h:panelGrid columns="1">
+                           <p:outputLabel for="contenueArticle" value="Contenu de l'article  "/>
+                       </h:panelGrid>
+                       <h:panelGrid columns="1">
+                           
+                           <p:inputTextarea rows="10" cols="50" id="contenueArticle" value="#{administrationMBean.selectObjectArticles.contenuArticle}" style=" background: #ffffff" />
+                           <br/>
+                           <f:facet name="footer">  
+                            <center>
+                                <p:commandButton value="Modifier"  style="background: #14a0da" icon="ui-icon-check"  ajax="false" actionListener="#{administrationMBean.modifier()}" update="@( .fieldModification, ..publication)"/>
+                                <p:commandButton value="Annuler" style="background: #843534"  icon="ui-icon-cancel" ajax="false" actionListener="#{administrationMBean.rafraichir()}" />
+
+                                <!--<p:commandLink action="faces/pages/rechercheAnomalie?faces-redirect=true" id="loginButton" value="Login" ajax="false"/>-->
+                            </center>
+                        </f:facet>  
+                       </h:panelGrid>
+                 
+                    </center>      
+                </p:fieldset>
+             </h:form>
+        </p:dialog>
+             
+    </ui:define>
+    
+
+</ui:composition>

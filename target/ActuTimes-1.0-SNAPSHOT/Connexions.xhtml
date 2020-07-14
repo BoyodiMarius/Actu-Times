@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates2.xhtml" id="connexion">
+    <ui:define name="content" >
+        <h:form id="connexion" styleClass="connexion">
+            <p:layout fullPage="true" styleClass="nav navbar-nav navbar-right"  >
+             
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center"  >
+                 
+                        <marquee >
+                            <h:outputText value="Connectez vous a votre compte ActuTimes" style="font-size: 30px;"/>
+                        </marquee>
+                  
+                    <center>
+                       <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />       
+                    <h:panelGrid  columnClasses="3" >  
+                        <p:outputLabel style="color: black" for="loginuser" value="Login" styleClass="label"/>  
+                        <p:inputText id="loginuser"  value="#{ConnexionMBean.login}" required="true" requiredMessage="Entrer le login" style="width: 200px; background: #ffffff" />  
+                        <p:message for="loginuser"/>
+                        
+                        <p:outputLabel  style="color: black" for="password" value="Mot de passe" styleClass="label"/>  
+                        <p:password  id="password" value="#{ConnexionMBean.pwd}" required="true"  feedback="false"  redisplay="true"
+                                     requiredMessage="Entrer le mot de passe" style="width: 200px;background: #ffffff" styleClass="selectmenu" 
+                                     weakLabel="Mot de passe Faible" goodLabel="Mot de Passe bon" strongLabel=" Mot de Passe Fort" promptLabel="Entrez votre mot de passe"/>  
+                        <p:message for="password"/>
+                        
+                        <br/>
+
+                        <f:facet name="footer">  
+                            <center>
+                                <p:commandButton value="Connexion" actionListener="#{ConnexionMBean.submit()}" icon="ui-icon-check" style="btn-primary" />
+                                <!--<p:commandLink action="faces/pages/rechercheAnomalie?faces-redirect=true" id="loginButton" value="Login" ajax="false"/>-->
+                            </center>
+                        </f:facet>  
+                    </h:panelGrid>  
+                 
+                    </center>      
+                </p:layoutUnit>
+            </p:layout>
+        </h:form>
+    </ui:define>
+</ui:composition>

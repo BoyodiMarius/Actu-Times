@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates.xhtml">
+    <ui:define name="content">
+        
+        <h:form id="ajout">
+           <p:layout fullPage="true" styleClass="nav navbar-nav navbar-right"  >
+             
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center"  >
+                 
+                        <marquee >
+                            <h:outputText value="#{acceuilMBean.actualite}" style="color: #a94442 ; font-size: 30px;"/>
+                        </marquee>
+                  
+                    <center>
+                       <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />       
+                     
+                       <p:tabView>
+                           <p:tab title="Toute l'Actualité" >
+                               <p:accordionPanel value="#{acceuilMBean.listeActualite}"  var="lesArtcicles"  >
+                                
+                                   <p:tab title="#{lesArtcicles.idCategorie.libelleCategorie} -  #{lesArtcicles.titreArticle}" >                                          
+                                       <h:panelGrid columns="2" cellpadding="10">
+                                            <p:graphicImage value="#{lesArtcicles.imageArticles}" width="300" height="300" /> 
+                                            <h:outputText value="#{lesArtcicles.contenuArticle}" />
+                                            <h:outputText value="Auteur : #{lesArtcicles.auteurArticle}" />
+                                            <p:commandButton styleClass="#{lesArtcicles.idArticles}"  value="J'aime" actionListener="#{acceuilMBean.Like}"  style="background-color: #008ac4" icon="ui-icon-heart" />
+                                       </h:panelGrid>                                       
+                                    </p:tab> 
+                                
+                                </p:accordionPanel>
+                           </p:tab>
+                            <p:tab title="Politiques">
+                                <p:accordionPanel value="#{acceuilMBean.listePolitique}"  var="lesArtciclesPolitique"  >
+                                
+                                   <p:tab title="#{lesArtciclesPolitique.titreArticle}" >                                          
+                                       <h:panelGrid columns="2" cellpadding="10">
+                                            <p:graphicImage value="#{lesArtciclesPolitique.imageArticles}" width="300" height="300" /> 
+                                            <h:outputText   value="#{lesArtciclesPolitique.contenuArticle}" />
+                                            <h:outputText   value="Auteur : #{lesArtcicles.auteurArticle}" />
+                                            <p:commandButton  styleClass="#{lesArtciclesPolitique.idArticles}" actionListener="#{acceuilMBean.Like}" value="J'aime"  style="background-color: #008ac4" icon="ui-icon-heart"  />
+                                       </h:panelGrid>                                       
+                                    </p:tab> 
+                                
+                                </p:accordionPanel>
+                           </p:tab>
+                            <p:tab title="Sport">
+                                <p:accordionPanel value="#{acceuilMBean.listeSport}"  var="lesArtciclesSport"  >
+                                
+                                   <p:tab title="#{lesArtciclesSport.titreArticle}" >                                          
+                                       <h:panelGrid columns="2" cellpadding="10">
+                                            <p:graphicImage value="#{lesArtciclesSport.imageArticles}" width="300" height="300" /> 
+                                            <h:outputText   value="#{lesArtciclesSport.contenuArticle}" />
+                                            <h:outputText   value="Auteur : #{lesArtcicles.auteurArticle}" />
+                                            <p:commandButton styleClass="#{lesArtciclesSport.idArticles}" actionListener="#{acceuilMBean.Like}" value="J'aime" style="background-color: #008ac4" icon="ui-icon-heart" />
+                                       </h:panelGrid>                                       
+                                    </p:tab> 
+                                
+                                </p:accordionPanel>
+                           </p:tab>
+                           
+                       </p:tabView>
+                    
+                 
+                    </center>      
+                </p:layoutUnit>
+            </p:layout>
+        </h:form>
+    </ui:define>
+    
+
+</ui:composition>

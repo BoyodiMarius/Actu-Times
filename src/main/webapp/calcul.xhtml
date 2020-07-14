@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates2.xhtml" id="connexion">
+    <ui:define name="content" >
+        <h:form id="connexion" styleClass="connexion">
+            <p:layout fullPage="true" styleClass="nav navbar-nav navbar-right"  >
+             
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center"  >
+                 
+                      
+                  
+                    <center>
+                       <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />       
+                    <h:panelGrid  columnClasses="3" >  
+                 <h:outputLabel value="etat" />
+                 <h:inputText value="#{calcul.etat}">
+               
+           </h:inputText>     
+        <h:outputLabel value="prix" />
+        <h:inputText value="#{calcul.prix}">
+               
+           </h:inputText>
+           <h:outputLabel value="quantite"/>
+           <h:inputText value="#{calcul.quantite}">
+               
+           </h:inputText>
+           <h:commandButton value="calculer" action="#{calcul.calcul()}"/>
+           <h:outputLabel value="resultat"/>
+           <h:inputText value="#{calcul.result}">
+               
+           </h:inputText>
+                    </h:panelGrid>  
+                 
+                    </center>      
+                </p:layoutUnit>
+            </p:layout>
+        </h:form>
+    </ui:define>
+</ui:composition>

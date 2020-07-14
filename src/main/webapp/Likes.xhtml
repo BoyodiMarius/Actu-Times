@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates.xhtml">
+    <ui:define name="content">
+        
+        <h:form id="ajout">
+           <p:layout fullPage="true" styleClass="nav navbar-nav navbar-right"  >
+             
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+
+                </p:layoutUnit>
+
+               <p:layoutUnit position="center"  >
+                    <p:tabView value="#{LikesMBean.listeArticleLike}" var="like"  class="cadre">
+                        <p:tab title="#{like.idCategorie.libelleCategorie} : #{like.titreArticle}">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <p:graphicImage value="#{like.imageArticles}" width="300" height="300" /> 
+                                <h:outputText   value="#{like.contenuArticle}" />
+                                <h:outputText  style="font-size: x-large; color: #000" value="Auteur : #{like.auteurArticle}" />
+                            </h:panelGrid> 
+                            <h:panelGrid columns="2">
+                                <h:outputText  style="font-size: x-large; color: #000" value="Date de Publication : " />
+                                <h:outputText style="font-size: x-large; color: #000" value="#{like.datePublication}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET" locale="fr"/>
+                                    </h:outputText>
+                            </h:panelGrid>
+                        </p:tab>
+                        
+                    </p:tabView>
+                        
+                </p:layoutUnit>
+            </p:layout>
+        </h:form>
+    </ui:define>
+    
+
+</ui:composition>

@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates2.xhtml" id="inscription">
+    <ui:define name="content" >
+        <h:form id="inscription" styleClass="inscription">
+            <p:layout fullPage="true" styleClass="nav navbar-nav navbar-right"  >
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center"  >
+                    
+                     
+                        <marquee >
+                            <h:outputText value="Créez votre compte Actutimes " style=" font-size: 30px;"/>
+                        </marquee>
+                  
+                    
+                        <table width="100%">
+                            <td width="25%">
+                                 <p:graphicImage name="/assets/images/journal1.jpg" />
+                            </td>
+                            <td width="75%">
+                                <center>
+                                    <p:fieldset id="fieldArticles" styleClass="fieldInscription" legend="Mes Informations">
+                                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                                 <h:panelGrid columns="3" styleClass="grid">
+                            
+                            <p:outputLabel for="pseudo"  value="Pseudo "/>
+                            <p:inputText id="pseudo" value="#{inscriptionsMBean.pseudo}"  required="true" requiredMessage="Entrer le pseudo" style="width: 200px;background: #ffffff" placeholder="Pseudo"/>
+                             <p:message for="pseudo"/>
+                            <p:outputLabel value=""/>
+                            <p:outputLabel value=""/>
+                            <p:outputLabel value=""/>
+                            <p:outputLabel for="email" value="Email "/>
+                            <p:inputText id="email" value="#{inscriptionsMBean.email}"   required="true" requiredMessage="Entrez adresse email" style="width: 200px;background: #ffffff" placeholder="Email"/>
+                             <p:message for="email"/>
+                            <p:outputLabel value=""/>
+                            <p:outputLabel value=""/>
+                            <p:outputLabel value=""/>
+                            <p:outputLabel for="password"  value="Mot de Passe "/>
+                            <p:password   id="password" value="#{inscriptionsMBean.pwd}"  required="true"  feedback="true"  redisplay="true"  requiredMessage="Entrer le mot de passe"  placeholder="mot de passe" style="width: 200px;background: #ffffff"
+                                      styleClass="selectmenu" weakLabel="Mot de passe Faible" goodLabel="Mot de Passe bon" strongLabel=" Mot de Passe Fort" promptLabel="Entrez votre mot de passe" /> 
+                            <p:message for="password"/>
+                            <p:outputLabel value=""/>
+                            <p:outputLabel value=""/> 
+                            <p:outputLabel value=""/>
+                            <p:outputLabel for="ConfirmPassword"  value="Confirmation Mot de Passe "/>
+                            <p:password  id="ConfirmPassword" value="#{inscriptionsMBean.confirmMdp}"  required="true"  feedback="true"  redisplay="true" promptLabel="Confirmez votre mot de passe" placeholder="mot de passe" strongLabel=" Mot de Passe Fort"
+                                         requiredMessage="Confirmez le mot de passe" style="width: 200px;background: #ffffff" styleClass="selectmenu" weakLabel="Mot de passe Faible" goodLabel="Mot de Passe bon" /> 
+                             <p:message for="ConfirmPassword"/>
+                                 </h:panelGrid>
+                                     <h:outputLabel value=""/>
+                                      <h:outputLabel value=""/>
+                                    <h:panelGrid columns="2">
+                                        <p:commandButton value="Valider" actionListener="#{inscriptionsMBean.enregistrer()}" style="background-color: #449d44" update="@(.fieldInscription)"  icon="ui-icon-check" />
+                                        <p:commandButton value="Annuler" actionListener="#{inscriptionsMBean.rafraichir()}" style="background-color: #a94442"  icon="ui-icon-cancel" />
+                                    </h:panelGrid>  
+                             </p:fieldset>
+                                    </center>  
+                            </td >
+                            
+                        </table>
+                       
+                        
+                </p:layoutUnit>
+            </p:layout>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+   

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      class="no-js" lang="">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>ActuTimes</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta name="description" content=""/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="apple-touch-icon" href="apple-touch-icon.png"/>  
+        <h:outputStylesheet name="assets/css/bootstrap.min.css"/>
+        <h:outputStylesheet name="assets/css/plugins.css"/>
+        <h:outputStylesheet name="assets/css/lato-webfont.css"/>
+        <h:outputStylesheet name="assets/css/magnific-popup.css"/>
+        <!--Theme custom css -->
+        <h:outputStylesheet name="assets/css/style.css"/>
+        <!--Theme Responsive css-->
+        <h:outputStylesheet name="assets/css/responsive.css"/>
+        <h:outputStylesheet name="css/default.css"/>
+        <h:outputStylesheet name="css/cssLayout.css"/>
+
+        <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <ui:insert name="head/"/>
+    </h:head>
+    <h:body>
+        <div>
+            <ui:include src="menuAdministration.xhtml"/>
+        </div>
+        <div>
+            <ui:insert name="content">
+                Template
+            </ui:insert>
+        </div>
+        
+        
+    </h:body>
+
+    
+</html>
